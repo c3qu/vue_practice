@@ -38,7 +38,7 @@ function show_detail() {
 
 <style scoped>
 table {
-    font-size: larger;
+    font-size:3rem;
     border-collapse: collapse;
     cursor: pointer;
 }

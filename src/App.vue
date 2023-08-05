@@ -3,6 +3,7 @@ import { ref, provide } from "vue"
 import SideBar from './components/SideBar.vue'
 import HostDetail from './components/HostDetail.vue'
 import CheckItemDetail from './components/CheckItemDetail.vue'
+import HostAddCheckItemDetail from "./components/HostAddCheckItemDetail.vue";
 
 const index = ref(1)
 
@@ -11,7 +12,8 @@ function setIndex(i) {
 }
 const compNameList = [
   HostDetail,
-  CheckItemDetail
+  CheckItemDetail,
+  HostAddCheckItemDetail
 ]
 provide('parentSetIndex', setIndex)
 </script>

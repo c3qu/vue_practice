@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref,inject} from 'vue'
 const data = ref(
     [
         {
@@ -19,6 +19,7 @@ const data = ref(
         }
     ]
 )
+const parentSetIndex = inject('parentSetIndex')
 const colunm_names = ref(
     {
         "name": "姓名",
@@ -36,7 +37,7 @@ function show_detail() {
         <tr>
             <th v-for="value in colunm_names">{{ value }}</th>
         </tr>
-        <tr v-for="row in data" @click="show_detail" class="table_body" title="打开对应检查项">
+        <tr v-for="row in data" @click="parentSetIndex(3)" class="table_body" title="打开对应检查项">
             <td v-for="_, key in colunm_names">{{ row[key] }}</td>
             <td><a href="https://github.com/c3qu" target="_blank">操作</a></td>
         </tr>
@@ -45,7 +46,7 @@ function show_detail() {
 
 <style scoped>
 table {
-    font-size: larger;
+    font-size: 3rem;
     border-collapse: collapse;
     cursor: pointer;
 }
