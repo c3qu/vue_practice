@@ -1,48 +1,34 @@
 <script setup>
+import { ref, provide } from "vue"
 import SideBar from './components/SideBar.vue'
+import HostDetail from './components/HostDetail.vue'
+import CheckItemDetail from './components/CheckItemDetail.vue'
+const index = ref(1)
+
+function setIndex(i) {
+  index.value = i
+}
+
+provide('parentSetIndex', setIndex)
 </script>
 
 <template>
   <header>
-    <!-- <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" /> -->
-
-    <div class="wrapper">
-      <!-- <HelloWorld msg="You did it!" /> -->
-      
-    </div>
+    <div class="wrapper"></div>
   </header>
 
   <main>
-    <!-- <TheWelcome /> -->
-    <SideBar/>
+    <div class="main_show_area">
+      <SideBar />
+      <HostDetail v-if="index === 1" />
+      <CheckItemDetail v-if="index === 2" />
+    </div>
   </main>
 </template>
 
 <style scoped>
-/* header {
-  line-height: 1.5;
+.main_show_area {
+  display: flex;
+  flex-direction: row;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-} */
 </style>
