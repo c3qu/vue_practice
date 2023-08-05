@@ -3,12 +3,16 @@ import { ref, provide } from "vue"
 import SideBar from './components/SideBar.vue'
 import HostDetail from './components/HostDetail.vue'
 import CheckItemDetail from './components/CheckItemDetail.vue'
+
 const index = ref(1)
 
 function setIndex(i) {
   index.value = i
 }
-
+const compNameList = [
+  HostDetail,
+  CheckItemDetail
+]
 provide('parentSetIndex', setIndex)
 </script>
 
@@ -20,8 +24,7 @@ provide('parentSetIndex', setIndex)
   <main>
     <div class="main_show_area">
       <SideBar />
-      <HostDetail v-if="index === 1" />
-      <CheckItemDetail v-if="index === 2" />
+      <component :is="compNameList[index-1]" />
     </div>
   </main>
 </template>

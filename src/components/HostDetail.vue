@@ -36,7 +36,7 @@ function show_detail() {
         <tr>
             <th v-for="value in colunm_names">{{ value }}</th>
         </tr>
-        <tr v-for="row in data" @click="show_detail" class="table_body">
+        <tr v-for="row in data" @click="show_detail" class="table_body" title="打开对应检查项">
             <td v-for="_, key in colunm_names">{{ row[key] }}</td>
             <td><a href="https://github.com/c3qu" target="_blank">操作</a></td>
         </tr>
@@ -56,5 +56,6 @@ th {
 }
 
 .table_body:hover {
+    
     background-color: blue;
 }</style>
