@@ -8,12 +8,13 @@ import SideBar from './components/SideBar.vue'
 
     <div class="wrapper">
       <!-- <HelloWorld msg="You did it!" /> -->
-      <SideBar/>
+      
     </div>
   </header>
 
   <main>
     <!-- <TheWelcome /> -->
+    <SideBar/>
   </main>
 </template>
 
