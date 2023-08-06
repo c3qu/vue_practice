@@ -1,10 +1,18 @@
 <script setup>
+import { ref} from 'vue'
+const info=defineProps(["info"])
+const data=ref(info.info.childInfo)
+console.log(info.info.childInfo)
 </script>
 <template>
 <form>
-    <div><label>IP</label><input type="text" value="1.1.1.1" readonly/></div>
+    <div v-for="v,k in data">
+        <label>{{ k }}</label>
+        <input type="text" :value="`${v}`" readonly/>
+    </div>
+    <!-- <div><label>IP</label><input type="text" value="1.1.1.1" readonly/></div>
     <div><label>MAC地址</label><input type="text" value="50-5A-65-C1-08-68" readonly/></div>
-    <div><label>主机名</label><input type="text" value="谭旭升的笔记本" readonly/></div>
+    <div><label>主机名</label><input type="text" value="谭旭升的笔记本" readonly/></div> -->
 
 </form>
 </template>
