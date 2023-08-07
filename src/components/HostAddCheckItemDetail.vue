@@ -1,7 +1,8 @@
 <script setup>
 import { ref} from 'vue'
-const info=defineProps(["info"])
-const data=ref(info.info)
+defineProps({
+    info:Object
+})
 const colunm_names = ref(
     {
         "name": "姓名",
@@ -12,7 +13,7 @@ const colunm_names = ref(
 </script>
 <template>
 <form>
-    <div v-for="v,k in data">
+    <div v-for="v,k in info">
         <label>{{ colunm_names[k] }}</label>
         <input type="text" :value="`${v}`" readonly/>
     </div>
