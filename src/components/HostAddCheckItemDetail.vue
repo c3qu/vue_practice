@@ -17,10 +17,6 @@ const colunm_names = ref(
         <label>{{ colunm_names[k] }}</label>
         <input type="text" :value="`${v}`" readonly/>
     </div>
-    <!-- <div><label>IP</label><input type="text" value="1.1.1.1" readonly/></div>
-    <div><label>MAC地址</label><input type="text" value="50-5A-65-C1-08-68" readonly/></div>
-    <div><label>主机名</label><input type="text" value="谭旭升的笔记本" readonly/></div> -->
-
 </form>
 </template>
 

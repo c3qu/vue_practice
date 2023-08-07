@@ -19,7 +19,6 @@ const data = ref(
         }
     ]
 )
-const parentSetIndex = inject('parentSetIndex')
 const colunm_names = ref(
     {
         "name": "姓名",

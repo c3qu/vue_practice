@@ -7,10 +7,9 @@ import HostAddCheckItemDetail from "./components/HostAddCheckItemDetail.vue";
 
 const index = ref(1)
 let childInfo=null
-function setIndex(i,info) {
+const setIndex=(i,info)=>{
   index.value = i
   if (info!=null){
-    console.log(info)
     childInfo=info
   }
 }
@@ -19,7 +18,6 @@ const compNameList = [
   CheckItemDetail,
   HostAddCheckItemDetail
 ]
-provide('parentSetIndex', setIndex)
 </script>
 
 <template>
