@@ -1,6 +1,5 @@
 <script setup>
-import { ref, inject } from 'vue'
-const parentSetIndex = inject('parentSetIndex')
+import {ref} from 'vue'
 
 const items = ref([
     { "index": 1, "name": "主机", "url": "/host" },
@@ -8,16 +7,16 @@ const items = ref([
 ])
 
 const showSideBar=ref(true)
-function hideAndShowSideBar(){
-    showSideBar.value=!showSideBar.value
-}
+
 </script>
 
 <template>
-    <input type="checkbox" checked=true @click="hideAndShowSideBar()"/>
+    <div>
+    <input type="checkbox" checked=true @click="showSideBar=!showSideBar"/>
     <ul v-if="showSideBar">
-        <li v-for="item in items" @click="parentSetIndex(item.index)">{{ item.name }}</li>
+        <li v-for="item in items" @click="$emit('update:modelValue',item.index)">{{ item.name }}</li>
     </ul>
+    </div>
 </template>
 
 <style scoped>

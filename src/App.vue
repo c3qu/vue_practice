@@ -6,8 +6,8 @@ import CheckItemDetail from './components/CheckItemDetail.vue'
 import HostAddCheckItemDetail from "./components/HostAddCheckItemDetail.vue";
 
 const index = ref(1)
-var childInfo={}
-
+let childInfo=null
+let childItemName=null
 function setIndex(i,info) {
   index.value = i
   if (info!=null){
@@ -30,8 +30,10 @@ provide('parentSetIndex', setIndex)
 
   <main>
     <div class="main_show_area">
-      <SideBar />
-      <component :is="compNameList[index-1]" :info="{childInfo}"/>
+      <SideBar v-model="index" />
+      <component v-if="childInfo" :is="compNameList[index-1]" :info="childInfo"/>
+      <component v-else :is="compNameList[index-1]"/>
+    
     </div>
   </main>
 </template>
