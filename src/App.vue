@@ -4,8 +4,9 @@ import SideBar from './components/SideBar.vue'
 import HostDetail from './components/HostDetail.vue'
 import CheckItemDetail from './components/CheckItemDetail.vue'
 import HostAddCheckItemDetail from "./components/HostAddCheckItemDetail.vue";
+import Collapsible from "@/components/Collapsible.vue";
 
-const index = ref(1)
+const index = ref(4)
 let childInfo=null
 const setIndex=(i,info)=>{
   index.value = i
@@ -16,7 +17,8 @@ const setIndex=(i,info)=>{
 const compNameList = [
   HostDetail,
   CheckItemDetail,
-  HostAddCheckItemDetail
+  HostAddCheckItemDetail,
+  Collapsible
 ]
 </script>
 
