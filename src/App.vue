@@ -1,25 +1,25 @@
 <script setup>
-import { ref, provide } from "vue"
-import SideBar from './components/SideBar.vue'
-import HostDetail from './components/HostDetail.vue'
-import CheckItemDetail from './components/CheckItemDetail.vue'
+import { ref, provide } from "vue";
+import SideBar from "./components/SideBar.vue";
+import HostDetail from "./components/HostDetail.vue";
+import CheckItemDetail from "./components/CheckItemDetail.vue";
 import HostAddCheckItemDetail from "./components/HostAddCheckItemDetail.vue";
 import Collapsible from "@/components/Collapsible.vue";
 
-const index = ref(4)
-let childInfo=null
-const setIndex=(i,info)=>{
-  index.value = i
-  if (info!=null){
-    childInfo=info
+const index = ref(4);
+let childInfo = null;
+const setIndex = (i, info) => {
+  index.value = i;
+  if (info != null) {
+    childInfo = info;
   }
-}
+};
 const compNameList = [
   HostDetail,
   CheckItemDetail,
   HostAddCheckItemDetail,
-  Collapsible
-]
+  Collapsible,
+];
 </script>
 
 <template>
@@ -30,8 +30,11 @@ const compNameList = [
   <main>
     <div class="main_show_area">
       <SideBar v-model="index" />
-      <component  :is="compNameList[index-1]" :info="childInfo" @set-index="setIndex"/>
-    
+      <component
+        :is="compNameList[index - 1]"
+        :info="childInfo"
+        @set-index="setIndex"
+      />
     </div>
   </main>
 </template>
