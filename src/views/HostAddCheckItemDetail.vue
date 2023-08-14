@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 defineProps({
   info: Object,
 });
-const colunm_names = ref({
+const column_names = ref({
   name: "姓名",
   age: "年龄",
   address: "地址",
@@ -12,7 +12,7 @@ const colunm_names = ref({
 <template>
   <form>
     <div v-for="(v, k) in info">
-      <label>{{ colunm_names[k] }}</label>
+      <label>{{ column_names[k] }}</label>
       <input type="text" :value="`${v}`" readonly />
     </div>
   </form>

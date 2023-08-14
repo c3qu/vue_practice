@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Category, CheckItem, CollapsibleList } from "./Ok";
+import { Category, CheckItem, CollapsibleList } from "@/components/Ok";
 
 const listData = ref(
   new CollapsibleList([
@@ -14,11 +14,20 @@ const listData = ref(
     ]),
   ]),
 );
-// const handler = () => {
-//   console.log(listData.value)
-// }
+let data_bak={}
+const handler1=()=>{
+  data_bak={...listData.value}
+}
+
+const handler2=()=>{
+  console.log(JSON.stringify(data_bak)===JSON.stringify(listData.value))
+}
+
+
 </script>
 <template>
+  <button @click="handler1">测试1</button>
+  <button @click="handler2">测试2</button>
   <div class="collapsible-list1">
     <div>
       <input type="checkbox" v-model="listData.isAllSelected" />

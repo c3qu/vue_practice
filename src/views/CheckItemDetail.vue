@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 const data = ref([
   {
@@ -10,7 +10,7 @@ const data = ref([
     status: "已检查",
   },
 ]);
-const colunm_names = ref({
+const column_names = ref({
   name: "检查项名称",
   status: "状态",
 });
@@ -22,10 +22,10 @@ function show_detail() {
 <template>
   <table>
     <tr>
-      <th v-for="value in colunm_names">{{ value }}</th>
+      <th v-for="value in column_names">{{ value }}</th>
     </tr>
     <tr v-for="row in data" @click="show_detail" class="table_body">
-      <td v-for="(_, key) in colunm_names">{{ row[key] }}</td>
+      <td v-for="(_, key) in column_names">{{ row[key] }}</td>
       <td><a href="https://github.com/c3qu" target="_blank">操作</a></td>
     </tr>
   </table>
