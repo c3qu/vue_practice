@@ -1,31 +1,38 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import {ref} from "vue";
+import {useRouter} from 'vue-router'
+import {publicStore} from "@/stores/Public";
+import axios from "axios";
 
-const data = ref([
-  {
-    name: "谭旭升",
-    age: 30,
-    address: "重庆",
-  },
-  {
-    name: "桃白白",
-    age: 40,
-    address: "日本",
-  },
-  {
-    name: "周鱼",
-    age: 20,
-    address: "重庆",
-  },
-]);
+// const axios = require('axios');
+
+const instance = axios.create({
+  baseURL: 'http://127.0.0.1:8000/',
+  timeout: 1000,
+  headers: {'Access-Control-Allow-Origin': '*'}
+});
+const personData = ref({})
+instance.get('/person/')
+    .then(function (response) {
+      personData.value = response.data
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 const column_name = ref({
   name: "姓名",
-  age: "年龄",
+  sex: "性别",
   address: "地址",
 });
+const router = useRouter()
+const ps = publicStore()
 
-function show_detail() {
-  alert("OK");
+function show_detail(row: any) {
+  router.push({
+    name: 'host_add_check_item_detail'
+  })
+  ps.setData(row)
 }
 </script>
 
@@ -35,8 +42,8 @@ function show_detail() {
       <th v-for="value in column_name">{{ value }}</th>
     </tr>
     <tr
-        v-for="row in data"
-        @click="$emit('setIndex', 3, row)"
+        v-for="row in personData"
+        @click="show_detail(row)"
         class="table_body"
         title="打开对应检查项"
     >
