@@ -12,14 +12,12 @@ interface User {
 const tableRef = ref<TableInstance>()
 
 const resetDateFilter = () => {
-  tableRef.value!.clearFilter(['date'])
+  // tableRef.value!.clearFilter(['date'])
+  console.log(tableData)
+  console.log(tableDataBak)
 }
 // TODO: improvement typing when refactor table
-const clearFilter = () => {
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-  tableRef.value!.clearFilter()
-}
+
 const formatter = (row: User, column: TableColumnCtx<User>) => {
   return row.address
 }
@@ -34,7 +32,18 @@ const filterHandler = (
   const property = column['property']
   return row[property] === value
 }
+const value = ref('')
 
+const options = [
+  {
+    value: 'Home',
+    label: 'Home',
+  },
+  {
+    value: 'Company',
+    label: 'Company',
+  }
+]
 const tableData: User[] = [
   {
     date: '2016-05-03',
@@ -61,18 +70,59 @@ const tableData: User[] = [
     tag: 'Office',
   },
 ]
+let tableDataBak: User[] = []
+const copyArray = (arr: any[]) => {
+  return arr.map(e => {
+    if (typeof e === 'object') {
+      return Object.assign({}, e)
+    } else {
+      return e
+    }
+  })
+}
+const clone = (obj: any) => {
+  if (obj.constructor === Array) {
+    return obj.map(e => {
+      clone(e)
+    })
+  } else if (obj.constructor === Object) {
+    const tmpObj:object= {}
+    for (const i in obj) {
+      tmpObj[i] = clone(obj[i])
+    }
+    return tmpObj
+  } else {
+    return obj
+  }
+}
+
+const clearFilter = () => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// tableRef.value!.clearFilter()
+//   Object.assign(tableDataBak, tableData)
+//   tableDataBak = copyArray(tableData)
+  tableDataBak = structuredClone(tableData)
+}
+
 </script>
 <template>
   <div>
     <el-button @click="resetDateFilter">reset date filter</el-button>
     <el-button @click="clearFilter">reset all filters</el-button>
-    <el-table ref="tableRef" row-key="date" :data="tableData" style="width: 100%">
+    <el-table
+        ref="tableRef"
+        row-key="date"
+        :data="tableData"
+        style="width: 100%"
+        :cell-style="{padding: '0', height: '10px'}"
+    >
       <el-table-column
           prop="date"
           label="Date"
           sortable
           width="180"
           column-key="date"
+          formatter=""
           :filters="[
         { text: '2016-05-01', value: '2016-05-01' },
         { text: '2016-05-02', value: '2016-05-02' },
@@ -87,7 +137,7 @@ const tableData: User[] = [
       <el-table-column
           prop="tag"
           label="Tag"
-          width="100"
+          width="200"
           :filters="[
         { text: 'Home', value: 'Home' },
         { text: 'Office', value: 'Office' },
@@ -95,13 +145,22 @@ const tableData: User[] = [
           :filter-method="filterTag"
           filter-placement="bottom-end"
       >
+
         <template #default="scope">
-          <el-tag
-              :type="scope.row.tag === 'Home' ? '' : 'success'"
-              disable-transitions
-          >
-            {{ scope.raw }}
-          </el-tag>
+          <el-select v-model="scope.row.tag" class="m-2" size="large">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+            />
+          </el-select>
+          <!--          <el-tag-->
+          <!--              :type="scope.row.tag === 'Home' ? '' : 'success'"-->
+          <!--              disable-transitions-->
+          <!--          >-->
+          <!--            {{ scope.raw }}-->
+          <!--          </el-tag>-->
         </template>
       </el-table-column>
     </el-table>

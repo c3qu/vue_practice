@@ -1,134 +1,161 @@
+export class recordValue {
+    private _value: any;
+    private _oldValue: any[];
+
+    constructor(value: any) {
+        const expected_types = ['number', 'string', 'boolean', 'bitint']
+        if (!expected_types.includes(typeof value)) {
+            throw TypeError("Expected number,string,boolean and bitint");
+        }
+
+        this._value = value
+        this._oldValue = []
+    }
+
+    get value() {
+        return this._value
+    }
+
+    set value(value) {
+        this._oldValue.push(this._value)
+        this._value = value
+    }
+
+    isChange(): boolean {
+        return this._value != this._oldValue[0]
+    }
+}
+
 export class CheckItem {
-  private _id: number;
-  private _name: string;
-  private _selected: boolean;
+    private _id: number;
+    private _name: string;
+    private _selected: boolean;
 
-  constructor(id: number, name: string, selected: boolean) {
-    this._id = id;
-    this._name = name;
-    this._selected = selected;
-  }
+    constructor(id: number, name: string, selected: boolean) {
+        this._id = id;
+        this._name = name;
+        this._selected = selected;
+    }
 
-  get id(): number {
-    return this._id;
-  }
+    get id(): number {
+        return this._id;
+    }
 
-  set id(value: number) {
-    this._id = value;
-  }
+    set id(value: number) {
+        this._id = value;
+    }
 
-  get name(): string {
-    return this._name;
-  }
+    get name(): string {
+        return this._name;
+    }
 
-  set name(value: string) {
-    this._name = value;
-  }
+    set name(value: string) {
+        this._name = value;
+    }
 
-  get selected(): boolean {
-    return this._selected;
-  }
+    get selected(): boolean {
+        return this._selected;
+    }
 
-  set selected(value: boolean) {
-    this._selected = value;
-  }
+    set selected(value: boolean) {
+        this._selected = value;
+    }
 }
 
 export class Category {
-  private _categoryName: string;
-  private _selected: boolean;
-  private _data: CheckItem[];
-  private _isExpand: boolean;
+    private _categoryName: string;
+    private _selected: boolean;
+    private _data: CheckItem[];
+    private _isExpand: boolean;
 
-  constructor(categoryName: string, isExpand: boolean, data: CheckItem[]) {
-    this._categoryName = categoryName;
-    const dataSelectedList = data.map((i) => i.selected);
-    this._selected = !dataSelectedList.includes(false);
-    this._data = data;
-    this._isExpand = isExpand;
-  }
-
-
-
-  get selected():boolean {
-    const dataSelectedList = this._data.map((i) => i.selected);
-    this._selected = !dataSelectedList.includes(false);
-    return this._selected;
-  }
-
-  set selected(value:boolean) {
-    this._data.map((i) => (i.selected = value));
-    this._selected = value;
-  }
+    constructor(categoryName: string, isExpand: boolean, data: CheckItem[]) {
+        this._categoryName = categoryName;
+        const dataSelectedList = data.map((i) => i.selected);
+        this._selected = !dataSelectedList.includes(false);
+        this._data = data;
+        this._isExpand = isExpand;
+    }
 
 
-  get categoryName(): string {
-    return this._categoryName;
-  }
+    get selected(): boolean {
+        const dataSelectedList = this._data.map((i) => i.selected);
+        this._selected = !dataSelectedList.includes(false);
+        return this._selected;
+    }
 
-  set categoryName(value: string) {
-    this._categoryName = value;
-  }
+    set selected(value: boolean) {
+        this._data.map((i) => (i.selected = value));
+        this._selected = value;
+    }
 
-  get data(): CheckItem[] {
-    return this._data;
-  }
 
-  set data(value: CheckItem[]) {
-    this._data = value;
-  }
+    get categoryName(): string {
+        return this._categoryName;
+    }
 
-  get isExpand(): boolean {
-    return this._isExpand;
-  }
+    set categoryName(value: string) {
+        this._categoryName = value;
+    }
 
-  set isExpand(value: boolean) {
-    this._isExpand = value;
-  }
+    get data(): CheckItem[] {
+        return this._data;
+    }
+
+    set data(value: CheckItem[]) {
+        this._data = value;
+    }
+
+    get isExpand(): boolean {
+        return this._isExpand;
+    }
+
+    set isExpand(value: boolean) {
+        this._isExpand = value;
+    }
 }
 
 export class CollapsibleList {
-  private _isAllSelected: boolean
-  private _isAllExpand: boolean
-  private _items: Category[]
+    private _isAllSelected: boolean
+    private _isAllExpand: boolean
+    private _items: Category[]
 
-  constructor(items:Category[]) {
-    const selectedList = items.map(i => i.selected);
-    const isExpandList = items.map((i) => i.isExpand);
-    this._isAllSelected = !selectedList.includes(false);
-    this._isAllExpand = !isExpandList.includes(false);
-    this._items = items;
-  }
+    constructor(items: Category[]) {
+        const selectedList = items.map(i => i.selected);
+        const isExpandList = items.map((i) => i.isExpand);
+        this._isAllSelected = !selectedList.includes(false);
+        this._isAllExpand = !isExpandList.includes(false);
+        this._items = items;
+    }
 
-  get isAllSelected():boolean {
-    const selectedList = this._items.map((i) => i.selected);
-    this._isAllSelected = !selectedList.includes(false);
-    return this._isAllSelected;
-  }
+    get isAllSelected(): boolean {
+        const selectedList = this._items.map((i) => i.selected);
+        this._isAllSelected = !selectedList.includes(false);
+        return this._isAllSelected;
+    }
 
-  set isAllSelected(value:boolean) {
-    this.items.map(i=> i.selected = value);
-    this._isAllSelected = value;
-  }
+    set isAllSelected(value: boolean) {
+        this.items.map(i => i.selected = value);
+        this._isAllSelected = value;
+    }
 
-  get isAllExpand():boolean{
-    const isExpandList = this._items.map((i) => i.isExpand);
-    this._isAllExpand = !isExpandList.includes(false);
-    return this._isAllExpand;
-  }
+    get isAllExpand(): boolean {
+        const isExpandList = this._items.map((i) => i.isExpand);
+        this._isAllExpand = !isExpandList.includes(false);
+        return this._isAllExpand;
+    }
 
-  set isAllExpand(value:boolean) {
-    this.items.map((i) => (i.isExpand = value));
-    this._isAllExpand = value;
-  }
+    set isAllExpand(value: boolean) {
+        this.items.map((i) => (i.isExpand = value));
+        this._isAllExpand = value;
+    }
 
-  get items():Category[] {
-    return this._items;
-  }
+    get items(): Category[] {
+        return this._items;
+    }
 
-  set items(value:Category[]) {
-    this._items = value;
-  }
+    set items(value: Category[]) {
+        this._items = value;
+    }
 
 }
 

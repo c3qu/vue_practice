@@ -4,6 +4,7 @@ import CheckItemDetail from "@/views/CheckItemDetail.vue";
 import Collapsible from "@/views/Collapsible.vue";
 import HostAddCheckItemDetail from "@/views/HostAddCheckItemDetail.vue";
 import elementUITable from "@/views/elementUITable.vue";
+import ElementDialog from "@/views/ElementDialog.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.history),
@@ -44,7 +45,13 @@ const router = createRouter({
             path:'/eleUITable',
             name:'eleUITable',
             component:elementUITable,
+        },
+        {
+            path:'/ElementDialog',
+            name:'ElementDialog',
+            component:ElementDialog,
         }
+
     ]
 })
 

@@ -4,7 +4,10 @@ import {ref} from "vue";
 const items = ref([
   {index: 1, name: "主机", url: "/host_detail"},
   {index: 2, name: "检查项", url: "/check_item_detail"},
-  {index: 3, name: "Table", url: '/eleUITable'}
+  {index: 3, name: "Table", url: '/eleUITable'},
+  {index: 4, name: "可折叠列表", url: '/collapsible'},
+  {index: 5, name: "Dialog", url: '/ElementDialog'}
+
 ]);
 
 const showSideBar = ref(true);
